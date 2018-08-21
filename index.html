@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta content="" name="description">
+    <meta content="Online Marketing is a must so is health and fitness 
+    we specialize in  marketing for small business in 
+    this industry from health food shops  
+    to dietitians we make sure you get noticed in a Google search." name="description">
     <!-- Meta Description -->
 
 
@@ -236,13 +239,59 @@
                                 <br>
                                 <span>Esthetician</span>
                                 <br>
-                                <span>Adore Hair studio</span>
+                                <span>
+                                    <a target="_blank" href="http://adorehairstudio.net">Adore Hair studio</a>
+                                </span>
                                 <br>
                             </div>
 
                         </div>
                     </div>
+                    <div class="profile-item">
+                        <div class="profile-2">
 
+                        </div>
+                        <p>
+                            They did great work! And the price was right within my budget , I needed some SEO work done on my Non-profit site and they
+                            responded quickly and the whole processes did not take long at all ,they kept me in the loop
+                            the entire time I would definitely work with them again.
+                        </p>
+                        <div class="profile-qoute-footer">
+                            <div class="profile-qoute-footer-info">
+                                <span>Lizzie Lewis</span>
+                                <br>
+                                <span>Non-profit Volunteer</span>
+                                <br>
+                                <span>
+                                    <a target="_blank" href="https://rescueteamla.org/"></a>The Rescue Team LA</span>
+                                <br>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <div class="profile-3">
+
+                        </div>
+                        <p>
+                            I recently opened a small business and I had no online presence ,they designed and created a website for me took care of
+                            setting up the hosting and SEO they also registered my business with Google and yelp all for
+                            a reasonable price, could not ask for anything more would definitely recommend .
+                        </p>
+                        <div class="profile-qoute-footer">
+                            <div class="profile-qoute-footer-info">
+                                <span>Luis Rincon</span>
+                                <br>
+                                <span>Rincon KM Auto Care Owner</span>
+                                <br>
+                                <span>
+                                    <a target="_blank" href="http://rinconautomotiverepairs.com/">Rincon KM Auto Care</a>
+                                </span>
+                                <br>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <hr>
             </div>
@@ -253,29 +302,44 @@
         <h2>Need A Qoute?
             <br>
             <span> Contact Us </span>
+            <br>
+            <br>
+            <span>Email:
+                <a href="mailto:info@virtualhavenstudios.com">info@virtualhavenstudios.com</a>
+            </span>
+            <br>
+            <span>Address: Palm Desert Ca 92211</span>
         </h2>
 
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="form-group">
-                    <div class="form-row">
-                        <div class="form-group col-md-12 user-contact-info ">
-                            <input id="name" placeholder="Full Name" type="text" class="form-control">
-                            <input id="email" placeholder="Email" type="text" class="form-control">
-                            <input id="subject" placeholder="Subject" type="text" class="form-control">
+            <div class="col-md-6 col-md-offset-3 contact-main-container">
+                <form>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 user-contact-info ">
+                                <input id="name" placeholder="Full Name" type="text" class="form-control">
+                                <input id="email" placeholder="Email" type="text" class="form-control">
+                                <input id="subject" placeholder="Subject" type="text" class="form-control">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-row">
-                        <div class="form-group col-md-12 user-message-info">
-                            <input id="message-box" placeholder="Message" type="text" class="form-control">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 user-message-info">
+                                <input id="message-box" placeholder="Message" type="text" class="form-control">
 
+                            </div>
+                        </div>
+                        <div class="form-row user-message-info-send">
+                            <input id="sendmail" value="Send" class="btn btn-primary" type="submit">
                         </div>
                     </div>
-                    <div class="form-row user-message-info-send">
-                        <input value="Send" class="btn btn-primary" type="button">
-                    </div>
+                </form>
+                <div class="thankyou">
+                    <h2>Thank You!
+                        <br>
+                        <span>We will contact you soon</span>
+                    </h2>
                 </div>
 
             </div>
@@ -304,7 +368,7 @@
         </div>
         <!--end of footer-->
 
-        <p align="center" class="text-muted copyright">&copy; virtualhavenstudios.com</p>
+        <p align="center" class="text-muted copyright">&copy; 2018 Virtualhavenstudios.com All Rights Reserved</p>
 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -317,7 +381,34 @@
 
         <script src="js/bootstrap.min.js"></script>
 
+        <script>
+            console.log("send mail js ok");
+            $("form").submit((e) => {
+                e.preventDefault();
+                $.ajax(
+                    {
+                        url: "/sendmail",
+                        method: "POST",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ "command": "on" }),
+                        complete: (msg) => {
+                            if (msg["status"] === 200 || msg["status"] === "200") {
+                                console.log(msg["status"]); alert("message sent!")
+                                $("form").animate({ opacity: "0" }, 500, () => {
+                                    $(".thankyou").animate({ top: "50%" }, 500, () => { })
+                                })
+                            }
+                            else {
+                                alert("message failed to send");
+                            }
+                        },
+                        error: (error) => { console.log(error["status"]); }
+                    }
+                ).done((msg) => { console.log(msg) })
 
+            })
+        </script>
 
 </body>
 
